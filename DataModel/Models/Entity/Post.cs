@@ -1,4 +1,5 @@
 ﻿using DataModel.Interfaces;
+using DataModel.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,5 +21,6 @@ namespace DataModel.Models.Entity
         public Chat? Comments { get; set; }
         [Required]
         public string AuthorId { get; set; } = "NoName";
+        public User? Author { get; set; }
     }
 }

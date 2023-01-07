@@ -1,0 +1,29 @@
+﻿@model Chat
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Chatting room";
+}
+
+<div>
+    <form asp-action="CreateMassageToChat" asp-controller="CrudMassage">
+        <input name="massage.Title" value=""/>
+        <input name="massage.Description" value="" />
+        <input hidden="hidden" name="chatId" value="@Model.Id"/>
+        <input hidden="hidden" name="returnUrl" value="@Context.Request.PathAndQuery()"/>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+@foreach(Massage massage in Model.Massages)
+{
+    <div style="margin: 10px; border: solid;">
+        <div>@massage.Title</div>
+        <div>@massage.Description</div>
+    </div>
+    <form asp-action="RemoveMassage" asp-controller="CrudMassage">
+        <input hidden="hidden" name="massageId" value="@massage.Id"/>
+        <input hidden="hidden" name="returnUrl" value="@Context.Request.PathAndQuery()"/>
+        <button type="submit">Remove</button>
+    </form>
+}

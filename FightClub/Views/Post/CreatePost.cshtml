@@ -1,0 +1,17 @@
+﻿@model Post
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Create post";
+}
+
+<div style="margin: 30px">
+    <form method="post" asp-action="CreatePostWithChat" asp-controller="PostAndChat">
+        <div>
+            <input name="Title" value="" />
+        </div>
+        <div>
+            <textarea name="Description"></textarea>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</div>

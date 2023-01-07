@@ -31,20 +31,24 @@ namespace EntityFramework
             modelBuilder.Entity<Post>()
                 .HasOne(post => post.Comments)
                 .WithOne()
-                .HasForeignKey<Chat>(chat => chat.PostId);
+                .HasForeignKey<Chat>(chat => chat.PostId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Chat>()
                 .HasMany(chat => chat.Massages)
-                .WithOne();
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Club>()
                 .HasOne(club => club.ChatClub)
                 .WithOne()
-                .HasForeignKey<Chat>(chat => chat.ClubId);
+                .HasForeignKey<Chat>(chat => chat.ClubId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Fight>()
                 .HasMany(fight => fight.BetBank)
-                .WithOne();
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

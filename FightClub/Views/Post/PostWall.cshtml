@@ -1,5 +1,33 @@
-﻿@{
+﻿@model IEnumerable<Post>
+
+@{
     Layout = "_Layout";
+    ViewBag.Title = "Post wall";
 }
 
-Hello world!!!
+<div style="display: flex; flex-wrap:nowrap">
+    <div style="padding: 3px"><a asp-action="CreatePost" asp-controller="Post">Create post</a></div>
+</div>
+<div style="margin: 20px">
+    @foreach (Post post in Model ?? new Post[] { })
+    {
+        <div style="margin: 10px; border: solid;">
+            <div>@post.Title</div>
+            <div>@post.Description</div>
+            <div>@post.Id</div>
+        </div>
+        <form method="post" asp-action="RemovePostWithChat" asp-controller="PostAndChat">
+            <input hidden="hidden" name="postId" value="@post.Id">
+            <button type="submit" style="color:crimson">Delete</button>
+        </form>
+        <div style="padding: 3px">
+            <a asp-action="EditPost" asp-route-postId="@post.Id" asp-controller="Post">Edit post</a>
+        </div>
+        @if (post.Comments != null)
+        {
+            <div>
+                <a asp-action="ChattingRoom" asp-controller="Chat" asp-route-chatId="@post.Comments.Id">Comments</a>
+            </div>
+        }
+    }
+</div>

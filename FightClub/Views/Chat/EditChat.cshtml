@@ -1,0 +1,18 @@
+﻿@model Chat
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Edit chat";
+}
+
+<div style="margin: 30px">
+    <form method="post" asp-action="UpdateChat" asp-controller="CrudChat">
+        <div>
+            <input name="Name" value="@Model.Name" />
+        </div>
+        <div>
+            <input hidden="hidden" name="Id" value="@Model.Id" />
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+</div>

@@ -1,0 +1,20 @@
+﻿@model Post
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Edit post";
+}
+
+<div style="margin: 30px">
+    <form method="post" asp-action="UpdatePost" asp-controller="CrudPost">
+        <div>
+            <input name="Title" value="@Model.Title" />
+        </div>
+        <div>
+            <textarea name="Description">@Model.Description</textarea>
+        </div>
+        <div>
+            <input hidden="hidden" name="Id" value="@Model.Id" />
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+</div>

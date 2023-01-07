@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,94 +16,45 @@ namespace EntityFramework.Entity
             _context = context;
         }
 
-        public IQueryable GetAllEntityOfDb<T>() where T : class, IEntity
+        public IQueryable<T> GetAllEntityOfDb<T>() where T : class, IEntity
         {
-            try
-            {
-               return DbEntityFactory<T>().AsQueryable();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Database output error");
-            }
+            return DbEntityFactory<T>().AsQueryable();
         }
 
         public async Task AddEntityToDbAsync<T>(T entity) where T: class, IEntity
         {
-            try
-            {
-                await DbEntityFactory<T>().AddAsync(entity);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error adding from database");
-            }
+            await DbEntityFactory<T>().AddAsync(entity);
+            _context.SaveChanges();
         }
 
         public async Task AddRangeEntityToDbAsync<T>(params T[] entites) where T: class, IEntity
         {
-            try
-            {
-                await DbEntityFactory<T>().AddRangeAsync(entites);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error range adding from database");
-            }
+            await DbEntityFactory<T>().AddRangeAsync(entites);
+            _context.SaveChanges();
         }
 
         public void UpdateEntityToDb<T>(T entity) where T: class, IEntity
         {
-            try
-            {
-                DbEntityFactory<T>().Update(entity); 
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error updating from database");
-            }
+            DbEntityFactory<T>().Update(entity);
+            _context.SaveChanges();
         }
 
         public void UpdateRangeEntityToDb<T>(params T[] entites) where T: class, IEntity
         {
-            try
-            {
-                DbEntityFactory<T>().UpdateRange(entites);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error range updating from database");
-            }
+            DbEntityFactory<T>().UpdateRange(entites);
+            _context.SaveChanges();
         }
 
         public void RemovetEntityToDb<T>(T entity) where T: class, IEntity
         {
-            try
-            {
-                DbEntityFactory<T>().Remove(entity);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error removing from database");
-            }
+            DbEntityFactory<T>().Remove(entity);
+            _context.SaveChanges();
         }
 
         public void RemovetRangeEntityToDb<T>(params T[] entites) where T: class, IEntity
         {
-            try
-            {
-                DbEntityFactory<T>().RemoveRange(entites);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error range removing from database");
-            }
+            DbEntityFactory<T>().RemoveRange(entites);
+            _context.SaveChanges();
         }
 
         private DbSet<T> DbEntityFactory<T>() where T : class, IEntity

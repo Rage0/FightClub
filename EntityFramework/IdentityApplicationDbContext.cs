@@ -20,7 +20,7 @@ namespace EntityFramework
         {
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Posts)
-                .WithOne()
+                .WithOne(post => post.Author)
                 .HasForeignKey(post => post.AuthorId);
 
             modelBuilder.Entity<User>()
@@ -29,17 +29,17 @@ namespace EntityFramework
 
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Bets)
-                .WithOne()
+                .WithOne(bet => bet.Author)
                 .HasForeignKey(bet => bet.AuthorId);
 
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Massages)
-                .WithOne()
+                .WithOne(massage => massage.Author)
                 .HasForeignKey(massage => massage.AuthorId);
 
             modelBuilder.Entity<User>()
                 .HasMany(user => user.OwnerChats)
-                .WithOne()
+                .WithOne(chat => chat.Author)
                 .HasForeignKey(chat => chat.AuthorId);
 
             base.OnModelCreating(modelBuilder);

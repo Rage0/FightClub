@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Chat>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "All chats";
+}
+
+<div style="display: flex; flex-wrap:nowrap">
+    <a asp-action="CreateChat" asp-controller="Chat">Create Chat</a>
+</div>
+<div style="margin: 10px">
+    @foreach(Chat chat in Model ?? new Chat[] { })
+    {
+        <div style="margin: 10px; border: solid;">
+            <div>@chat.Name</div>
+            <div>@chat.Id</div>
+        </div>
+
+        <form method="post" asp-action="RemoveChat" asp-controller="CrudChat">
+            <input hidden="hidden" name="chatId" value="@chat.Id">
+            <button type="submit" style="color:crimson">Delete</button>
+        </form>
+        <div style="padding: 3px">
+            <a asp-action="EditChat" asp-route-chatId="@chat.Id" asp-controller="Chat">Edit chat</a>
+        </div>
+        <div style="padding: 3px">
+            <a asp-action="ChattingRoom" asp-route-chatId="@chat.Id" asp-controller="Chat">Comments</a>
+        </div>
+    }
+</div>

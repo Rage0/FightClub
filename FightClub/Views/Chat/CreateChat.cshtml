@@ -1,0 +1,15 @@
+﻿@model Chat
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Create chat";
+}
+
+<div style="margin: 30px">
+    <form method="post" asp-action="CreateChat" asp-controller="CrudChat">
+        <div>
+            <input name="Name" value="" />
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</div>

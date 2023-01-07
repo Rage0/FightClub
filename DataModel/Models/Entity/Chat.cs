@@ -20,5 +20,6 @@ namespace DataModel.Models.Entity
         public Guid? PostId { get; set; }
         [Required]
         public string AuthorId { get; set; } = "NoName";
+        public User? Author { get; set; }
     }
 }

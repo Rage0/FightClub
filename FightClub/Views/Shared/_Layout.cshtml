@@ -6,6 +6,14 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div style="display:flex; flex-wrap: nowrap">
+        <div style="margin:10px;">
+            <a asp-action="PostWall" asp-controller="Post">Post wall</a>
+        </div>
+        <div style="margin:10px">
+            <a asp-action="AllChats" asp-controller="Chat">All chats</a>
+        </div>
+    </div>
     <div>
         @RenderBody()
     </div>

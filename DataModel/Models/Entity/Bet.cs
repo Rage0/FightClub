@@ -1,4 +1,5 @@
 ﻿using DataModel.Interfaces;
+using DataModel.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,5 +15,6 @@ namespace DataModel.Models.Entity
         public decimal Money { get; set; } = decimal.Zero;
         [Required]
         public string AuthorId { get; set; } = "NoName";
+        public User? Author { get; set; }
     }
 }

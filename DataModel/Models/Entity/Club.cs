@@ -3,6 +3,7 @@ using DataModel.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,7 @@ namespace DataModel.Models.Entity
         public DateTime CreateAt { get; set; }
         [Required]
         public string CreaterId { get; set; } = "NoName";
+        [NotMapped]
+        public User? Creater { get; set; }
     }
 }
