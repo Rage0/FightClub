@@ -17,7 +17,14 @@ builder.Services.AddTransient<IRepositoryContext, ContextEntityFramework>();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddDbContext<IdentityApplicationDbContext>();
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<UserProfile, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 5; 
+    options.Password.RequireNonAlphanumeric = false; 
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+})
     .AddEntityFrameworkStores<IdentityApplicationDbContext>();
 
 var app = builder.Build();
@@ -25,6 +32,9 @@ var app = builder.Build();
 app.UseStaticFiles();
 
 app.MapControllerRoute(name: "AllChats", pattern: "Chats/", defaults: new { controller = "Chat", action = "AllChats" });
+
+app.MapControllerRoute(name: "Register", pattern: "Register/", defaults: new { controller = "Register", action = "Register" });
+app.MapControllerRoute(name: "SignIn", pattern: "SignIn/", defaults: new { controller = "SignIn", action = "SignIn" });
 
 app.MapControllerRoute(name: "CreateChat", pattern: "{controller}/Create", defaults: new { controller = "Chat", action = "CreateChat" });
 app.MapControllerRoute(name: "CreatePost", pattern: "{controller}/Create", defaults: new { controller = "Post", action = "CreatePost" });

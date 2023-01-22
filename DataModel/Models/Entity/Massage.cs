@@ -18,7 +18,7 @@ namespace DataModel.Models.Entity
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
         [Required]
-        public string AuthorId { get; set; } = "NoName";
-        public User? Author { get; set; }
+        public string ProfileId { get; set; } = "NoName";
+        public UserProfile? Profile { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,14 +18,17 @@ namespace FightClub.Controllers
         {
             return View(_context.GetAllEntityOfDb<Post>()
                 .Include(post => post.Comments)
+                .Include(post => post.Profile)
                 .AsEnumerable());
         }
 
+        [Authorize]
         public IActionResult CreatePost()
         {
             return View(new Post());
         }
-        
+
+        [Authorize]
         public async Task<IActionResult> EditPost(Guid postId)
         {
             Post? post = await _context.GetAllEntityOfDb<Post>()

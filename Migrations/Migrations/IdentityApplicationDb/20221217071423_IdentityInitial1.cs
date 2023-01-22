@@ -58,7 +58,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -91,7 +91,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetUsers_Club_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Club",
-                        principalColumn: "Id");
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -111,7 +111,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -131,7 +131,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -149,13 +149,13 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -175,7 +175,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -194,7 +194,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_Bet_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -216,7 +216,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_Post_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -238,18 +238,18 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_Chat_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Chat_Club_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Club",
-                        principalColumn: "Id");
+                        principalColumn: "UserId");
                     table.ForeignKey(
                         name: "FK_Chat_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Post",
-                        principalColumn: "Id");
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -271,13 +271,13 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         name: "FK_Massage_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Massage_Chat_ChatId",
                         column: x => x.ChatId,
                         principalTable: "Chat",
-                        principalColumn: "Id");
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -325,12 +325,12 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Bet_AuthorId",
                 table: "Bet",
-                column: "AuthorId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_AuthorId",
                 table: "Chat",
-                column: "AuthorId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_ClubId",
@@ -347,7 +347,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Massage_AuthorId",
                 table: "Massage",
-                column: "AuthorId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Massage_ChatId",
@@ -357,7 +357,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Post_AuthorId",
                 table: "Post",
-                column: "AuthorId");
+                column: "ProfileId");
         }
 
         /// <inheritdoc />

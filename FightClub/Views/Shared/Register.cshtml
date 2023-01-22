@@ -1,0 +1,22 @@
+﻿@model RegisterModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Register";
+}
+
+<form method="post" asp-action="Register" asp-controller="Register">
+    <div style="margin:5px">
+        Name: <input asp-for="Name" value=""/>
+    </div>
+    <div style="margin:5px">
+        Email: <input asp-for="Email" value=""/>
+    </div>
+    <div style="margin:5px">
+        Password: <input asp-for="Password" value=""/>
+    </div>
+    <div style="margin:5px">
+        Password confirm: <input asp-for="PasswordConfirm" value=""/>
+    </div>
+    <button type="submit">Register</button>
+</form>

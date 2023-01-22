@@ -27,31 +27,31 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("Money")
                         .HasColumnType("numeric");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Bet");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -68,9 +68,9 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<Guid?>("PostId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ProfileId");
 
                     b.HasIndex("ClubId")
                         .IsUnique();
@@ -83,14 +83,14 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreaterId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -101,18 +101,18 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Club");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -132,9 +132,9 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ProfileId");
 
                     b.HasIndex("ChatId");
 
@@ -143,11 +143,11 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -165,16 +165,16 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Post");
                 });
 
             modelBuilder.Entity("DataModel.Models.Identity.User", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
@@ -230,7 +230,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ClubId");
 
@@ -246,7 +246,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -261,7 +261,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -272,11 +272,11 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -288,7 +288,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("RoleId");
 
@@ -297,11 +297,11 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -313,7 +313,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("UserId");
 
@@ -380,7 +380,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Bets")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -389,7 +389,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("OwnerChats")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -406,7 +406,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Massages")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -419,7 +419,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Posts")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -13,7 +13,7 @@ namespace DataModel.Models.Entity
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public ICollection<User> Members { get; set; } = new List<User>();
+        public ICollection<UserProfile> Members { get; set; } = new List<UserProfile>();
         public ICollection<Bet> BetBank { get; set; } = new HashSet<Bet>();
         public bool CloseBet { get; set; } = false;
         public DateTime StartAtFight { get; set; }

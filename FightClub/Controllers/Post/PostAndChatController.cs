@@ -1,16 +1,22 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using DataModel.Models.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FightClub.Controllers
 {
+    [Authorize]
     public class PostAndChatController : Controller
     {
         private IRepositoryContext _context;
-        public PostAndChatController(IRepositoryContext context)
+        private UserManager<UserProfile> _userManager;
+        public PostAndChatController(IRepositoryContext context, UserManager<UserProfile> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> CreatePostWithChat(Post post, string returnUrl = "")
@@ -19,12 +25,14 @@ namespace FightClub.Controllers
             {
                 Chat chat = new Chat
                 {
+                    ProfileId = UserIdFactory(User.Identity.Name),
                     Name = post.Title ?? string.Empty,
                     CreateAt = DateTime.UtcNow,
                 };
                 await _context.AddEntityToDbAsync<Chat>(chat);
 
                 post.Comments = chat;
+                post.ProfileId = UserIdFactory(User.Identity.Name);
                 await _context.AddEntityToDbAsync<Post>(post);
 
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
@@ -69,6 +77,12 @@ namespace FightClub.Controllers
         private IActionResult DefaultPostUrl()
         {
             return RedirectToAction("PostWall", "Post");
+        }
+
+        private string UserIdFactory(string username)
+        {
+            UserProfile? user = _userManager.FindByNameAsync(username).Result;
+            return user.Id;
         }
     }
 }

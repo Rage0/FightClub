@@ -13,6 +13,24 @@
         <div style="margin:10px">
             <a asp-action="AllChats" asp-controller="Chat">All chats</a>
         </div>
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <div style="margin:10px">
+                <a asp-action="Profile" asp-controller="User" asp-route-userName="@User.Identity.Name">Profile</a>
+            </div>
+            <div style="margin:10px">
+                <a asp-action="SignOut" asp-controller="SignIn">SignOut</a>
+            </div>
+        }
+        else
+        {
+            <div style="margin:10px">
+                <a asp-action="SignIn" asp-controller="SignIn">SignIn</a>
+            </div>
+            <div style="margin:10px">
+                <a asp-action="Register" asp-controller="Register">Register</a>
+            </div>
+        }
     </div>
     <div>
         @RenderBody()

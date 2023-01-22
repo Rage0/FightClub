@@ -1,9 +1,11 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FightClub.Controllers
 {
+    [Authorize]
     public class MassageController : Controller
     {
         private IRepositoryContext _context;

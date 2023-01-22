@@ -28,21 +28,21 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid?>("FightId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("Money")
                         .HasColumnType("numeric");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("FightId");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Bets");
                 });
@@ -52,10 +52,6 @@ namespace Migrations.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("ClubId")
                         .HasColumnType("uuid");
@@ -70,15 +66,19 @@ namespace Migrations.Migrations
                     b.Property<Guid?>("PostId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasIndex("AuthorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClubId")
                         .IsUnique();
 
                     b.HasIndex("PostId")
                         .IsUnique();
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Chats");
                 });
@@ -92,14 +92,14 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreaterId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -138,10 +138,6 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid?>("ChatId")
                         .HasColumnType("uuid");
 
@@ -152,6 +148,10 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -160,9 +160,9 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("ChatId");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Massages");
                 });
@@ -173,14 +173,14 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -193,12 +193,12 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -260,33 +260,27 @@ namespace Migrations.Migrations
 
                     b.HasIndex("FightId");
 
-                    b.ToTable("User");
+                    b.ToTable("UserProfile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
                 {
-                    b.HasOne("DataModel.Models.Identity.User", "Author")
-                        .WithMany("Bets")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataModel.Models.Entity.Fight", null)
                         .WithMany("BetBank")
                         .HasForeignKey("FightId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Author");
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
+                        .WithMany("Bets")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
                 {
-                    b.HasOne("DataModel.Models.Identity.User", "Author")
-                        .WithMany("OwnerChats")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataModel.Models.Entity.Club", null)
                         .WithOne("ChatClub")
                         .HasForeignKey("DataModel.Models.Entity.Chat", "ClubId")
@@ -297,37 +291,43 @@ namespace Migrations.Migrations
                         .HasForeignKey("DataModel.Models.Entity.Chat", "PostId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Author");
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
+                        .WithMany("OwnerChats")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
                 {
-                    b.HasOne("DataModel.Models.Identity.User", "Author")
-                        .WithMany("Massages")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataModel.Models.Entity.Chat", null)
                         .WithMany("Massages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Author");
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
+                        .WithMany("Massages")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
                 {
-                    b.HasOne("DataModel.Models.Identity.User", "Author")
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Posts")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.HasOne("DataModel.Models.Entity.Club", "Club")
                         .WithMany("Members")
@@ -365,7 +365,7 @@ namespace Migrations.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.Navigation("Bets");
 

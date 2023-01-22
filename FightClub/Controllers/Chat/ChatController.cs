@@ -1,5 +1,6 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,11 @@ namespace FightClub.Controllers
 
         public IActionResult AllChats()
         {
-            return View(_context.GetAllEntityOfDb<Chat>());
+            return View(_context.GetAllEntityOfDb<Chat>()
+                .Include(chat => chat.Profile));
         }
 
+        [Authorize]
         public IActionResult CreateChat()
         {
             return View(new Chat());
@@ -38,6 +41,7 @@ namespace FightClub.Controllers
             }
         }
 
+        [Authorize]
         public IActionResult EditChat(Guid chatId)
         {
             Chat? chat = _context.GetAllEntityOfDb<Chat>()

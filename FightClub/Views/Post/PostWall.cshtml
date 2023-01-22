@@ -15,6 +15,10 @@
             <div>@post.Title</div>
             <div>@post.Description</div>
             <div>@post.Id</div>
+            @if (post.Profile != null)
+            {
+                <div>@post.Profile.UserName</div>
+            }
         </div>
         <form method="post" asp-action="RemovePostWithChat" asp-controller="PostAndChat">
             <input hidden="hidden" name="postId" value="@post.Id">

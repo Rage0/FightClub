@@ -27,11 +27,11 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -44,7 +44,7 @@ namespace Migrations.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("FightId");
 
@@ -55,11 +55,11 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -79,7 +79,7 @@ namespace Migrations.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ClubId")
                         .IsUnique();
@@ -94,14 +94,14 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreaterId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -112,14 +112,14 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Clubs");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Fight", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -136,18 +136,18 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("StartAtFight")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Fights");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -170,7 +170,7 @@ namespace Migrations.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ChatId");
 
@@ -181,11 +181,11 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -206,7 +206,7 @@ namespace Migrations.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("UserId");
 
@@ -215,7 +215,7 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Identity.User", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
@@ -269,7 +269,7 @@ namespace Migrations.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("ClubId");
 

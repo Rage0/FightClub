@@ -1,48 +1,57 @@
-﻿using DataModel.Models.Identity;
+﻿using DataModel.Models.Entity;
+using DataModel.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EntityFramework
 {
-    public class IdentityApplicationDbContext : IdentityDbContext<User>
+    public class IdentityApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public IdentityApplicationDbContext(DbContextOptions<IdentityApplicationDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Entity<User>()
+            builder.Entity<UserProfile>()
                 .HasMany(user => user.Posts)
-                .WithOne(post => post.Author)
-                .HasForeignKey(post => post.AuthorId);
+                .WithOne(post => post.Profile)
+                .HasForeignKey(post => post.ProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Club)
-                .WithMany(club => club.Members);
-
-            modelBuilder.Entity<User>()
+            builder.Entity<UserProfile>()
                 .HasMany(user => user.Bets)
-                .WithOne(bet => bet.Author)
-                .HasForeignKey(bet => bet.AuthorId);
+                .WithOne(bet => bet.Profile)
+                .HasForeignKey(bet => bet.ProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
+            builder.Entity<UserProfile>()
                 .HasMany(user => user.Massages)
-                .WithOne(massage => massage.Author)
-                .HasForeignKey(massage => massage.AuthorId);
+                .WithOne(massage => massage.Profile)
+                .HasForeignKey(massage => massage.ProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
+            builder.Entity<UserProfile>()
                 .HasMany(user => user.OwnerChats)
-                .WithOne(chat => chat.Author)
-                .HasForeignKey(chat => chat.AuthorId);
+                .WithOne(chat => chat.Profile)
+                .HasForeignKey(chat => chat.ProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            base.OnModelCreating(modelBuilder);
+            builder.Entity<UserProfile>()
+                .HasOne(user => user.Club)
+                .WithOne(club => club.Profile)
+                .HasForeignKey<Club>(club => club.ProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(builder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

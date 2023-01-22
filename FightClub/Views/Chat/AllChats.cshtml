@@ -14,6 +14,10 @@
         <div style="margin: 10px; border: solid;">
             <div>@chat.Name</div>
             <div>@chat.Id</div>
+            @if (chat.Profile != null)
+            {
+                <div>@chat.Profile.UserName</div>
+            }
         </div>
 
         <form method="post" asp-action="RemoveChat" asp-controller="CrudChat">

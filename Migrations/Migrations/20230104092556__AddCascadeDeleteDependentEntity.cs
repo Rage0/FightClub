@@ -31,7 +31,7 @@ namespace Migrations.Migrations
                 table: "Bets",
                 column: "FightId",
                 principalTable: "Fights",
-                principalColumn: "Id",
+                principalColumn: "UserId",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
@@ -39,7 +39,7 @@ namespace Migrations.Migrations
                 table: "Chats",
                 column: "ClubId",
                 principalTable: "Clubs",
-                principalColumn: "Id",
+                principalColumn: "UserId",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
@@ -47,7 +47,7 @@ namespace Migrations.Migrations
                 table: "Chats",
                 column: "PostId",
                 principalTable: "Posts",
-                principalColumn: "Id",
+                principalColumn: "UserId",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
@@ -55,7 +55,7 @@ namespace Migrations.Migrations
                 table: "Massages",
                 column: "ChatId",
                 principalTable: "Chats",
-                principalColumn: "Id",
+                principalColumn: "UserId",
                 onDelete: ReferentialAction.Cascade);
         }
 
@@ -83,28 +83,28 @@ namespace Migrations.Migrations
                 table: "Bets",
                 column: "FightId",
                 principalTable: "Fights",
-                principalColumn: "Id");
+                principalColumn: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Chats_Clubs_ClubId",
                 table: "Chats",
                 column: "ClubId",
                 principalTable: "Clubs",
-                principalColumn: "Id");
+                principalColumn: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Chats_Posts_PostId",
                 table: "Chats",
                 column: "PostId",
                 principalTable: "Posts",
-                principalColumn: "Id");
+                principalColumn: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Massages_Chats_ChatId",
                 table: "Massages",
                 column: "ChatId",
                 principalTable: "Chats",
-                principalColumn: "Id");
+                principalColumn: "UserId");
         }
     }
 }

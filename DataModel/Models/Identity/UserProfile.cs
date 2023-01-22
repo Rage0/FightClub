@@ -1,5 +1,6 @@
 ﻿using DataModel.Models.Entity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataModel.Models.Identity
 {
-    public class User : IdentityUser
+    public class UserProfile : IdentityUser
     {
         public decimal CashAccount { get; set; } = decimal.Zero;
         public ICollection<Post> Posts { get; set; } = new List<Post>();

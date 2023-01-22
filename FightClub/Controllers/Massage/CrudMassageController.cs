@@ -1,10 +1,12 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FightClub.Controllers
 {
+    [Authorize]
     public class CrudMassageController : Controller
     {
         private IRepositoryContext _context;

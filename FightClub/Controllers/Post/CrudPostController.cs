@@ -1,17 +1,23 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using DataModel.Models.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace FightClub.Controllers
 {
+    [Authorize]
     public class CrudPostController : Controller
     {
         private IRepositoryContext _context;
-        public CrudPostController(IRepositoryContext context)
+        private UserManager<UserProfile> _userManager;
+        public CrudPostController(IRepositoryContext context, UserManager<UserProfile> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         #region Create Post
@@ -19,6 +25,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.ProfileId = UserIdFactory(User.Identity.Name);
                 await _context.AddEntityToDbAsync<Post>(post);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
@@ -98,6 +105,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.ProfileId = UserIdFactory(User.Identity.Name);
                 _context.UpdateEntityToDb<Post>(post);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
@@ -116,5 +124,12 @@ namespace FightClub.Controllers
         {
             return RedirectToAction("PostWall", "Post");
         }
+
+        private string UserIdFactory(string username)
+        {
+            UserProfile? user = _userManager.FindByNameAsync(username).Result;
+            return user.Id;
+        }
+
     }
 }

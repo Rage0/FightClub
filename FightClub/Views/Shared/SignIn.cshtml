@@ -1,0 +1,16 @@
+﻿@model SignInModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "SignIn";
+}
+
+<form method="post" asp-action="SignIn" asp-controller="SignIn">
+    <div style="margin:5px">
+        Email: <input asp-for="Email" value=""/>
+    </div>
+    <div style="margin:5px">
+        Password: <input asp-for="Password" value=""/>
+    </div>
+    <button type="submit">SignIn</button>
+</form>

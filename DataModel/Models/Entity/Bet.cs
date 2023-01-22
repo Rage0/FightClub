@@ -14,7 +14,7 @@ namespace DataModel.Models.Entity
         public Guid Id { get; set; }
         public decimal Money { get; set; } = decimal.Zero;
         [Required]
-        public string AuthorId { get; set; } = "NoName";
-        public User? Author { get; set; }
+        public string ProfileId { get; set; } = "NoName";
+        public UserProfile? Profile { get; set; }
     }
 }

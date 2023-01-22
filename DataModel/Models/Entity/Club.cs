@@ -18,11 +18,11 @@ namespace DataModel.Models.Entity
         public string? Description { get; set; }
         [Required]
         public Chat? ChatClub { get; set; }
-        public ICollection<User> Members { get; set; } = new List<User>();
+        public ICollection<UserProfile> Members { get; set; } = new List<UserProfile>();
         public DateTime CreateAt { get; set; }
         [Required]
-        public string CreaterId { get; set; } = "NoName";
+        public string ProfileId { get; set; } = "NoName";
         [NotMapped]
-        public User? Creater { get; set; }
+        public UserProfile? Profile { get; set; }
     }
 }
