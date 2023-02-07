@@ -37,7 +37,7 @@ namespace Migrations.Migrations
                     b.Property<decimal>("Money")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -45,7 +45,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("FightId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Bets");
                 });
@@ -69,7 +69,7 @@ namespace Migrations.Migrations
                     b.Property<Guid?>("PostId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -81,7 +81,7 @@ namespace Migrations.Migrations
                     b.HasIndex("PostId")
                         .IsUnique();
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Chats");
                 });
@@ -102,7 +102,7 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -151,7 +151,7 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -165,7 +165,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Massages");
                 });
@@ -183,7 +183,7 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -196,7 +196,7 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Posts");
                 });
@@ -275,7 +275,7 @@ namespace Migrations.Migrations
 
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Bets")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -296,7 +296,7 @@ namespace Migrations.Migrations
 
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("OwnerChats")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -312,7 +312,7 @@ namespace Migrations.Migrations
 
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Massages")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -323,7 +323,7 @@ namespace Migrations.Migrations
                 {
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Posts")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

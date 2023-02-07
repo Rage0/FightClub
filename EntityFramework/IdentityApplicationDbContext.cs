@@ -25,31 +25,31 @@ namespace EntityFramework
                 .HasMany(user => user.Posts)
                 .WithOne(post => post.Profile)
                 .HasForeignKey(post => post.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<UserProfile>()
                 .HasMany(user => user.Bets)
                 .WithOne(bet => bet.Profile)
                 .HasForeignKey(bet => bet.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<UserProfile>()
                 .HasMany(user => user.Massages)
                 .WithOne(massage => massage.Profile)
                 .HasForeignKey(massage => massage.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<UserProfile>()
                 .HasMany(user => user.OwnerChats)
                 .WithOne(chat => chat.Profile)
                 .HasForeignKey(chat => chat.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<UserProfile>()
                 .HasOne(user => user.Club)
-                .WithOne(club => club.Profile)
-                .HasForeignKey<Club>(club => club.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany(club => club.Members)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
 
             base.OnModelCreating(builder);
         }

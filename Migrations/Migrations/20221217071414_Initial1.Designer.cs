@@ -31,7 +31,7 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -59,7 +59,7 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -101,7 +101,7 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -147,7 +147,7 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -185,7 +185,7 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 

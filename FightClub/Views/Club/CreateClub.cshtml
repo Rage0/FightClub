@@ -1,0 +1,20 @@
+﻿@model Club
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Create club";
+}
+
+<div style="margin: 30px">
+    <form asp-action="CreateClubWithChat" asp-controller="ClubAndChat">
+        <div style="display:flex">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" value=""/>
+        </div>
+        <div style="display:flex">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description"></textarea>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</div>

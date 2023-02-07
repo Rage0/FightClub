@@ -87,6 +87,10 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("CreaterId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -94,14 +98,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ProfileId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfileId")
-                        .IsUnique();
 
                     b.ToTable("Club");
                 });
@@ -383,10 +380,10 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<decimal>("CashAccount")
                         .HasColumnType("numeric");
 
-                    b.Property<Guid?>("ClubId1")
+                    b.Property<Guid?>("ClubId")
                         .HasColumnType("uuid");
 
-                    b.HasIndex("ClubId1");
+                    b.HasIndex("ClubId");
 
                     b.HasDiscriminator().HasValue("UserProfile");
                 });
@@ -415,17 +412,6 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("OwnerChats")
                         .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
-                {
-                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
-                        .WithOne("Club")
-                        .HasForeignKey("DataModel.Models.Entity.Club", "ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -511,9 +497,12 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
-                    b.HasOne("DataModel.Models.Entity.Club", null)
+                    b.HasOne("DataModel.Models.Entity.Club", "Club")
                         .WithMany("Members")
-                        .HasForeignKey("ClubId1");
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Club");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
@@ -523,8 +512,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
-                    b.Navigation("ChatClub")
-                        .IsRequired();
+                    b.Navigation("ChatClub");
 
                     b.Navigation("Members");
                 });
@@ -537,8 +525,6 @@ namespace Migrations.Migrations.IdentityApplicationDb
             modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.Navigation("Bets");
-
-                    b.Navigation("Club");
 
                     b.Navigation("Massages");
 

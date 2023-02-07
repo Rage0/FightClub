@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Account\Role\" />
-    <Folder Include="Controllers\Club\" />
     <Folder Include="Controllers\Fight\" />
 	<Folder Include="..\Migrations\ApplicationDbContext" />
 	<Folder Include="Views\Massage\" />  

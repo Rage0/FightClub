@@ -3,17 +3,20 @@ using System;
 using EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Migrations.Migrations
+namespace Migrations.Migrations.IdentityApplicationDb
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(IdentityApplicationDbContext))]
+    [Migration("20230203172221__UpdateClubEntity")]
+    partial class UpdateClubEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("FightId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal>("Money")
                         .HasColumnType("numeric");
 
@@ -40,11 +40,9 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FightId");
-
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Bets");
+                    b.ToTable("Bet");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
@@ -80,7 +78,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chat");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
@@ -105,31 +103,7 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clubs");
-                });
-
-            modelBuilder.Entity("DataModel.Models.Entity.Fight", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("CloseBet")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("StartAtFight")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Fights");
+                    b.ToTable("Club");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
@@ -164,7 +138,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Massages");
+                    b.ToTable("Massage");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
@@ -195,10 +169,61 @@ namespace Migrations.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Post");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -206,23 +231,20 @@ namespace Migrations.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("CashAccount")
-                        .HasColumnType("numeric");
-
-                    b.Property<Guid?>("ClubId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
-
-                    b.Property<Guid?>("FightId")
-                        .HasColumnType("uuid");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -231,10 +253,12 @@ namespace Migrations.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
@@ -252,24 +276,123 @@ namespace Migrations.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<decimal>("CashAccount")
+                        .HasColumnType("numeric");
+
+                    b.Property<Guid?>("ClubId")
+                        .HasColumnType("uuid");
+
                     b.HasIndex("ClubId");
 
-                    b.HasIndex("FightId");
-
-                    b.ToTable("UserProfile");
+                    b.HasDiscriminator().HasValue("UserProfile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
                 {
-                    b.HasOne("DataModel.Models.Entity.Fight", null)
-                        .WithMany("BetBank")
-                        .HasForeignKey("FightId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Bets")
                         .HasForeignKey("ProfileId")
@@ -283,13 +406,11 @@ namespace Migrations.Migrations
                 {
                     b.HasOne("DataModel.Models.Entity.Club", null)
                         .WithOne("ChatClub")
-                        .HasForeignKey("DataModel.Models.Entity.Chat", "ClubId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DataModel.Models.Entity.Chat", "ClubId");
 
                     b.HasOne("DataModel.Models.Entity.Post", null)
                         .WithOne("Comments")
-                        .HasForeignKey("DataModel.Models.Entity.Chat", "PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DataModel.Models.Entity.Chat", "PostId");
 
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("OwnerChats")
@@ -304,8 +425,7 @@ namespace Migrations.Migrations
                 {
                     b.HasOne("DataModel.Models.Entity.Chat", null)
                         .WithMany("Massages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChatId");
 
                     b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Massages")
@@ -327,15 +447,63 @@ namespace Migrations.Migrations
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.HasOne("DataModel.Models.Entity.Club", "Club")
                         .WithMany("Members")
-                        .HasForeignKey("ClubId");
-
-                    b.HasOne("DataModel.Models.Entity.Fight", null)
-                        .WithMany("Members")
-                        .HasForeignKey("FightId");
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Club");
                 });
@@ -348,13 +516,6 @@ namespace Migrations.Migrations
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
                     b.Navigation("ChatClub");
-
-                    b.Navigation("Members");
-                });
-
-            modelBuilder.Entity("DataModel.Models.Entity.Fight", b =>
-                {
-                    b.Navigation("BetBank");
 
                     b.Navigation("Members");
                 });

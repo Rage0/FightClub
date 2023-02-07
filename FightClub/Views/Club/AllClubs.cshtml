@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Club>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "All clubs";
+}
+<div>
+    <a asp-action="CreateClub" asp-controller="Club">Create club</a>
+</div>
+<div style="margin: 10px">
+    @foreach(Club club in Model)
+    {
+        <div style="margin: 10px; border: solid;">
+            <div>Name: <a asp-action="ClubProfile" asp-controller="Club" asp-route-clubId="@club.Id">@club.Name</a></div>
+            <div>Description: @club.Description</div>
+            <div>Number of member: @club.Members.Count</div>
+            <div>Id: @club.Id</div>
+        </div>
+        <form asp-action="RemoveClubWithChat" asp-controller="ClubAndChat">
+            <input hidden="hidden" name="clubId" value="@club.Id"/>
+            <button type="submit">Delete</button>
+        </form>
+    }
+</div>

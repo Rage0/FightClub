@@ -168,7 +168,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Bets_UserProfile_ProfileId",
                 table: "Bets",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfile",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -176,7 +176,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Chats_UserProfile_ProfileId",
                 table: "Chats",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfile",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -184,7 +184,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Massages_UserProfile_ProfileId",
                 table: "Massages",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfile",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -192,7 +192,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_UserProfile_ProfileId",
                 table: "Posts",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfile",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -347,7 +347,7 @@ namespace Migrations.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Clubs_ProfileId",
                 table: "Clubs",
-                column: "ProfileId",
+                column: "CreaterId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -359,7 +359,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Bets_UserProfiles_ProfileId",
                 table: "Bets",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfiles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -367,7 +367,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Chats_UserProfiles_ProfileId",
                 table: "Chats",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfiles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -375,7 +375,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Clubs_UserProfiles_ProfileId",
                 table: "Clubs",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfiles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -383,7 +383,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Massages_UserProfiles_ProfileId",
                 table: "Massages",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfiles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -391,7 +391,7 @@ namespace Migrations.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_UserProfiles_ProfileId",
                 table: "Posts",
-                column: "ProfileId",
+                column: "CreaterId",
                 principalTable: "UserProfiles",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

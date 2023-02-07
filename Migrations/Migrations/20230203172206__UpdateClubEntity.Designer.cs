@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230104092556__AddCascadeDeleteDependentEntity")]
-    partial class AddCascadeDeleteDependentEntity
+    [Migration("20230203172206__UpdateClubEntity")]
+    partial class UpdateClubEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,9 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("CreaterId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("FightId")
                         .HasColumnType("uuid");
@@ -41,27 +37,24 @@ namespace Migrations.Migrations
                     b.Property<decimal>("Money")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("FightId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Bets");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("CreaterId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("ClubId")
                         .HasColumnType("uuid");
@@ -76,10 +69,11 @@ namespace Migrations.Migrations
                     b.Property<Guid?>("PostId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClubId")
                         .IsUnique();
@@ -87,14 +81,14 @@ namespace Migrations.Migrations
                     b.HasIndex("PostId")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -112,14 +106,14 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Clubs");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Fight", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -136,20 +130,16 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("StartAtFight")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Fights");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("CreaterId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("ChatId")
                         .HasColumnType("uuid");
@@ -161,33 +151,30 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ChatId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Massages");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("CreaterId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
@@ -196,6 +183,10 @@ namespace Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -203,19 +194,16 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.HasKey("Id");
 
-                    b.HasKey("UserId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("Id")
                         .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
@@ -269,13 +257,13 @@ namespace Migrations.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("text");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClubId");
 
                     b.HasIndex("FightId");
 
-                    b.ToTable("User");
+                    b.ToTable("UserProfile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Bet", b =>
@@ -285,9 +273,13 @@ namespace Migrations.Migrations
                         .HasForeignKey("FightId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataModel.Models.Identity.User", null)
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Bets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Chat", b =>
@@ -302,9 +294,13 @@ namespace Migrations.Migrations
                         .HasForeignKey("DataModel.Models.Entity.Chat", "PostId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataModel.Models.Identity.User", null)
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("OwnerChats")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Massage", b =>
@@ -314,19 +310,27 @@ namespace Migrations.Migrations
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataModel.Models.Identity.User", null)
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Massages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("DataModel.Models.Entity.Post", b =>
                 {
-                    b.HasOne("DataModel.Models.Identity.User", null)
+                    b.HasOne("DataModel.Models.Identity.UserProfile", "Profile")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.HasOne("DataModel.Models.Entity.Club", "Club")
                         .WithMany("Members")
@@ -346,8 +350,7 @@ namespace Migrations.Migrations
 
             modelBuilder.Entity("DataModel.Models.Entity.Club", b =>
                 {
-                    b.Navigation("ChatClub")
-                        .IsRequired();
+                    b.Navigation("ChatClub");
 
                     b.Navigation("Members");
                 });
@@ -364,7 +367,7 @@ namespace Migrations.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("DataModel.Models.Identity.User", b =>
+            modelBuilder.Entity("DataModel.Models.Identity.UserProfile", b =>
                 {
                     b.Navigation("Bets");
 

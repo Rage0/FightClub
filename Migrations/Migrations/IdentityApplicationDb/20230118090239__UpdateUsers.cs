@@ -227,7 +227,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Bet_ProfileId",
                 table: "Bet",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_ClubId",
@@ -244,12 +244,12 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_ProfileId",
                 table: "Chat",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Club_ProfileId",
                 table: "Club",
-                column: "ProfileId",
+                column: "CreaterId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -260,12 +260,12 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Massage_ProfileId",
                 table: "Massage",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_ProfileId",
                 table: "Post",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",

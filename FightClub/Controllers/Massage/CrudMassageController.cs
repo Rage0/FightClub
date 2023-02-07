@@ -1,6 +1,8 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
+using DataModel.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +12,11 @@ namespace FightClub.Controllers
     public class CrudMassageController : Controller
     {
         private IRepositoryContext _context;
-        public CrudMassageController(IRepositoryContext context)
+        private UserManager<UserProfile> _userManager;
+        public CrudMassageController(IRepositoryContext context, UserManager<UserProfile> userManage)
         {
             _context = context;
+            _userManager = userManage;
         }
 
         public async Task<IActionResult> CreateMassageToChat(Massage massage, Guid chatId, string returnUrl)
@@ -21,6 +25,7 @@ namespace FightClub.Controllers
                 .FirstOrDefaultAsync(chatContext => chatContext.Id == chatId);
             if (ModelState.IsValid && chat != null)
             {
+                massage.ProfileId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
                 chat.Massages.Add(massage);
                 await _context.AddEntityToDbAsync<Massage>(massage);
                 return Redirect(returnUrl);

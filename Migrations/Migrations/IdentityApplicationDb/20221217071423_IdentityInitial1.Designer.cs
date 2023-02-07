@@ -31,7 +31,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -40,7 +40,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Bet");
                 });
@@ -51,7 +51,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -70,7 +70,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.HasIndex("ClubId")
                         .IsUnique();
@@ -90,7 +90,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -112,7 +112,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -134,7 +134,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.HasIndex("ChatId");
 
@@ -147,7 +147,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("CreaterId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -167,7 +167,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Post");
                 });
@@ -380,7 +380,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Bets")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -389,7 +389,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("OwnerChats")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -406,7 +406,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Massages")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -419,7 +419,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
                 {
                     b.HasOne("DataModel.Models.Identity.User", null)
                         .WithMany("Posts")
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("CreaterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

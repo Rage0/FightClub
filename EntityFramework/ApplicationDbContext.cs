@@ -33,12 +33,12 @@ namespace EntityFramework
                 .HasOne(post => post.Comments)
                 .WithOne()
                 .HasForeignKey<Chat>(chat => chat.PostId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Chat>()
                 .HasMany(chat => chat.Massages)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Club>()
                 .HasOne(club => club.ChatClub)
@@ -49,7 +49,7 @@ namespace EntityFramework
             modelBuilder.Entity<Fight>()
                 .HasMany(fight => fight.BetBank)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             base.OnModelCreating(modelBuilder);
         }

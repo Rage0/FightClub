@@ -325,12 +325,12 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Bet_AuthorId",
                 table: "Bet",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_AuthorId",
                 table: "Chat",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chat_ClubId",
@@ -347,7 +347,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Massage_AuthorId",
                 table: "Massage",
-                column: "ProfileId");
+                column: "CreaterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Massage_ChatId",
@@ -357,7 +357,7 @@ namespace Migrations.Migrations.IdentityApplicationDb
             migrationBuilder.CreateIndex(
                 name: "IX_Post_AuthorId",
                 table: "Post",
-                column: "ProfileId");
+                column: "CreaterId");
         }
 
         /// <inheritdoc />
