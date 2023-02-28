@@ -18,7 +18,6 @@ namespace FightClub.Controllers
         public async Task<IActionResult> Profile(string userName)
         {
             UserProfile? user = await _userManager.Users
-                .Include(userContext => userContext.Club)
                 .SingleAsync(userContext => userContext.UserName == userName);
             if (user != null)
             {

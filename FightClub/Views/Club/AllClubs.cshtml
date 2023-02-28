@@ -13,7 +13,19 @@
         <div style="margin: 10px; border: solid;">
             <div>Name: <a asp-action="ClubProfile" asp-controller="Club" asp-route-clubId="@club.Id">@club.Name</a></div>
             <div>Description: @club.Description</div>
-            <div>Number of member: @club.Members.Count</div>
+            <div>
+                Number of member: @club.Members.Count 
+                <form asp-action="AddUserToClub" asp-controller="ActionOfClub">
+                    <input hidden="hidden" name="clubId" value="@club.Id" />
+                    <input hidden="hidden" name="returnUrl" value="@Context.Request.PathAndQuery()">
+                    <button type="submit">Add</button>
+                </form>
+                <form asp-action="RemoveUserFromClub" asp-controller="ActionOfClub">
+                    <input hidden="hidden" name="clubId" value="@club.Id" />
+                    <input hidden="hidden" name="returnUrl" value="@Context.Request.PathAndQuery()">
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
             <div>Id: @club.Id</div>
         </div>
         <form asp-action="RemoveClubWithChat" asp-controller="ClubAndChat">

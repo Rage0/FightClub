@@ -9,5 +9,15 @@
     <div>Name: @Model.Name</div>
     <div>Id: @Model.Id</div>
     <div>Creater: @ViewBag.NameCreaterOfClub</div>
-    <a asp-action="ChattingRoom" asp-controller="Chat" asp-route-chatId="@Model.ChatClub.Id">Chat</a>
+    <div>
+        <h5>Members</h5>
+        @foreach (UserProfile user in Model.Members)
+        {
+            <div>@user.UserName</div>
+        }
+    </div>
+    @if (Model.ChatClub != null)
+    {
+        <a asp-action="ChattingRoom" asp-controller="Chat" asp-route-chatId="@Model.ChatClub.Id">Chat</a>
+    }
 </div>

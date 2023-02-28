@@ -19,6 +19,6 @@ namespace DataModel.Models.Entity
         public Chat? ChatClub { get; set; }
         public ICollection<UserProfile> Members { get; set; } = new List<UserProfile>();
         public DateTime CreateAt { get; set; }
-        public string CreaterId { get; set; } = "NoName";
+        public string? CreaterId { get; set; } = "NoName";
     }
 }

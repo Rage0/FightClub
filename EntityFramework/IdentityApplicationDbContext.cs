@@ -28,12 +28,6 @@ namespace EntityFramework
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<UserProfile>()
-                .HasMany(user => user.Bets)
-                .WithOne(bet => bet.Profile)
-                .HasForeignKey(bet => bet.ProfileId)
-                .OnDelete(DeleteBehavior.ClientCascade);
-
-            builder.Entity<UserProfile>()
                 .HasMany(user => user.Massages)
                 .WithOne(massage => massage.Profile)
                 .HasForeignKey(massage => massage.ProfileId)
@@ -48,6 +42,7 @@ namespace EntityFramework
             builder.Entity<UserProfile>()
                 .HasOne(user => user.Club)
                 .WithMany(club => club.Members)
+                .HasForeignKey(user => user.ClubId)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
 

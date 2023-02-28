@@ -8,8 +8,8 @@
 <div>
     <div>Name: @Model.UserName</div>
     <div>Id: @Model.Id</div>
-    @if (Model.Club != null)
+    @if (Model.ClubId != null)
     {
-        <div><a asp-action="ClubProfile" asp-controller="Club" asp-route-clubId="@Model.Club.Id">Your club</a></div>
+        <div>ClubId: @Model.ClubId</div>
     }
 </div>

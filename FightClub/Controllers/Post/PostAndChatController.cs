@@ -26,7 +26,7 @@ namespace FightClub.Controllers
                 Chat chat = new Chat
                 {
                     ProfileId = UserIdFactory(User.Identity.Name),
-                    Name = post.Title ?? string.Empty,
+                    Name = post.Title + "_postChat" ?? string.Empty,
                     CreateAt = DateTime.UtcNow,
                 };
                 await _context.AddEntityToDbAsync<Chat>(chat);

@@ -33,6 +33,7 @@ namespace FightClub.Controllers
         {
             Club? club = await _context.GetAllEntityOfDb<Club>()
                 .Include(clubContext => clubContext.ChatClub)
+                .Include(clubContext => clubContext.Members)
                 .FirstOrDefaultAsync(clubContext => clubContext.Id == clubId);
             if (club != null)
             {

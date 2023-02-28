@@ -18,8 +18,6 @@ namespace EntityFramework
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Massage> Massages { get; set; }
-        public DbSet<Fight> Fights { get; set; }
-        public DbSet<Bet> Bets { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -46,9 +44,9 @@ namespace EntityFramework
                 .HasForeignKey<Chat>(chat => chat.ClubId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Fight>()
-                .HasMany(fight => fight.BetBank)
-                .WithOne()
+            modelBuilder.Entity<Club>()
+                .HasMany(club => club.Members)
+                .WithOne(user => user.Club)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             base.OnModelCreating(modelBuilder);

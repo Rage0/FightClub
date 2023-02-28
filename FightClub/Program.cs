@@ -6,6 +6,7 @@ using EntityFramework.Entity;
 using DataModel.Interfaces;
 using DataModel.Models.Identity;
 using Microsoft.AspNetCore.Identity;
+using FightClub.Infrastructure.TransientClasses;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 builder.Services.AddTransient<IRepositoryContext, ContextEntityFramework>();
+builder.Services.AddTransient<ActionOfClub>();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddDbContext<IdentityApplicationDbContext>();

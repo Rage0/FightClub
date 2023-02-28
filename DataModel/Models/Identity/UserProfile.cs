@@ -11,10 +11,9 @@ namespace DataModel.Models.Identity
 {
     public class UserProfile : IdentityUser
     {
-        public decimal CashAccount { get; set; } = decimal.Zero;
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         public Club? Club { get; set; }
-        public ICollection<Bet> Bets { get; set; } = new List<Bet>();
+        public Guid? ClubId { get; set; }
         public ICollection<Massage> Massages { get; set; } = new List<Massage>();
         public ICollection<Chat> OwnerChats { get; set; } = new List<Chat>();
     }

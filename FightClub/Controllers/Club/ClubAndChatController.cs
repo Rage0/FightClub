@@ -1,6 +1,7 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
 using DataModel.Models.Identity;
+using FightClub.Infrastructure.TransientClasses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,14 @@ namespace FightClub.Controllers
     {
         private IRepositoryContext _context;
         private UserManager<UserProfile> _userManager;
-        public ClubAndChatController(IRepositoryContext context, UserManager<UserProfile> userManager)
+        private ActionOfClub _actionClub;
+        public ClubAndChatController(IRepositoryContext context, 
+            UserManager<UserProfile> userManager,
+            ActionOfClub actionClub)
         {
             _context = context;
             _userManager = userManager;
+            _actionClub = actionClub;
         }
 
         public async Task<IActionResult> CreateClubWithChat(Club club, string returnUrl = "")
@@ -25,22 +30,23 @@ namespace FightClub.Controllers
             if (ModelState.IsValid)
             {
                 string username = User.Identity.Name;
+                Guid clubid= Guid.NewGuid();
 
                 Chat chat = new Chat()
                 {
                     Name = club.Name + "_clubChat",
-                    ProfileId = GetUser(username).Result.Id,
+                    Profile = GetUser(username).Result,
+                    ProfileId = GetUser(username).Result.Id
                 };
                 await _context.AddEntityToDbAsync<Chat>(chat);
 
+                club.Id = clubid;
                 club.ChatClub = chat;
                 club.CreaterId = GetUser(username).Result.Id;
-                club.Members.Add(GetUser(username).Result);
                 club.CreateAt = DateTime.UtcNow;
-
                 await _context.AddEntityToDbAsync<Club>(club);
-                
 
+                await _actionClub.AddUserToMemberClubAsync(username, clubid);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultClubUrl();
@@ -56,9 +62,9 @@ namespace FightClub.Controllers
         public async Task<IActionResult> RemoveClubWithChat(Guid clubId, string returnUrl = "")
         {
             Club? club = await _context.GetAllEntityOfDb<Club>()
-                .Include(club => club.ChatClub)
+                .Include(clubs => clubs.ChatClub)
                     .ThenInclude(chat => chat.Massages)
-                .FirstOrDefaultAsync(club => club.Id == clubId);
+                .FirstOrDefaultAsync(clubs => clubs.Id == clubId);
             if (club != null)
             {
                 if (club.ChatClub != null && club.ChatClub.Massages != null)
@@ -67,6 +73,7 @@ namespace FightClub.Controllers
                     _context.RemovetEntityToDb<Chat>(club.ChatClub);
                 }
 
+                await _actionClub.RemoveAllUsersFromMemberClubAsync(club.Id);
                 _context.RemovetEntityToDb<Club>(club);
 
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))

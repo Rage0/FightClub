@@ -25,7 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.csproj" />
     <ProjectReference Include="..\EntityFramework\EntityFramework.csproj" />
-    <ProjectReference Include="..\FightClub\FightClub.csproj" />
+    <ProjectReference Include="..\FightClub\NetworkClub.csproj" />
   </ItemGroup>
 
 </Project>

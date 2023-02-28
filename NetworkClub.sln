@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FightClub", "FightClub\FightClub.csproj", "{1FE50A29-E460-4E80-AB4D-7C83E9F484AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkClub", "FightClub\NetworkClub.csproj", "{1FE50A29-E460-4E80-AB4D-7C83E9F484AB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3C15AF1B-7ED4-44E5-991B-97B878AC9845} = {3C15AF1B-7ED4-44E5-991B-97B878AC9845}
 		{9F2C8F2B-65AC-434A-93DA-C6879246E2B0} = {9F2C8F2B-65AC-434A-93DA-C6879246E2B0}
@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework", "EntityFr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrations", "Migrations\Migrations.csproj", "{106BB868-B467-45D4-8E8C-CCA11F40B630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFightClub", "TestFightClub\TestFightClub.csproj", "{55DDCFF6-1B7F-4A1C-957F-A2956596C458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestNetworkClub", "TestFightClub\TestNetworkClub.csproj", "{55DDCFF6-1B7F-4A1C-957F-A2956596C458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
