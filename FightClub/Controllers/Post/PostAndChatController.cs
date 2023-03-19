@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Post
 {
     [Authorize]
     public class PostAndChatController : Controller
@@ -25,14 +25,14 @@ namespace FightClub.Controllers
             {
                 Chat chat = new Chat
                 {
-                    ProfileId = UserIdFactory(User.Identity.Name),
+                    ProfileId = UserFactory(User.Identity.Name).Id,
                     Name = post.Title + "_postChat" ?? string.Empty,
                     CreateAt = DateTime.UtcNow,
                 };
                 await _context.AddEntityToDbAsync<Chat>(chat);
 
                 post.Comments = chat;
-                post.ProfileId = UserIdFactory(User.Identity.Name);
+                post.ProfileId = UserFactory(User.Identity.Name).Id;
                 await _context.AddEntityToDbAsync<Post>(post);
 
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
@@ -79,10 +79,10 @@ namespace FightClub.Controllers
             return RedirectToAction("PostWall", "Post");
         }
 
-        private string UserIdFactory(string username)
+        private UserProfile? UserFactory(string username)
         {
             UserProfile? user = _userManager.FindByNameAsync(username).Result;
-            return user.Id;
+            return user;
         }
     }
 }

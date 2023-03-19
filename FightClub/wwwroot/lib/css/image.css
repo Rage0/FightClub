@@ -1,0 +1,21 @@
+﻿.img-list {
+    background-image: url(/Img/icon_svg/Tilda_Icons_1ed_list.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-group{
+    background-image: url(/Img/icon_svg/Tilda_Icons_1ed_group.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-bubbles {
+    background-image: url(/Img/icon_svg/Tilda_Icons_10cw_bubbles.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-shadow {
+    
+}

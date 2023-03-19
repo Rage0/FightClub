@@ -3,7 +3,7 @@ using DataModel.Models.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Massage
 {
     [Authorize]
     public class MassageController : Controller

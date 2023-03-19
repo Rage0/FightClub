@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Massage
 {
     [Authorize]
     public class CrudMassageController : Controller
@@ -34,11 +34,12 @@ namespace FightClub.Controllers
             {
                 return BadRequest("Chat is not exist or massage is not valid");
             }
-            
+
         }
 
         public async Task<IActionResult> CreateMassage(Massage massage, string returnUrl)
-        {;
+        {
+            ;
             if (ModelState.IsValid)
             {
                 await _context.AddEntityToDbAsync<Massage>(massage);

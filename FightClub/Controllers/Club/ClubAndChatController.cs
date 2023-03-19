@@ -1,14 +1,14 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
 using DataModel.Models.Identity;
-using FightClub.Infrastructure.TransientClasses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NetworkClub.Infrastructure.TransientClasses;
 using System;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Club
 {
     [Authorize]
     public class ClubAndChatController : Controller
@@ -16,7 +16,7 @@ namespace FightClub.Controllers
         private IRepositoryContext _context;
         private UserManager<UserProfile> _userManager;
         private ActionOfClub _actionClub;
-        public ClubAndChatController(IRepositoryContext context, 
+        public ClubAndChatController(IRepositoryContext context,
             UserManager<UserProfile> userManager,
             ActionOfClub actionClub)
         {
@@ -30,7 +30,7 @@ namespace FightClub.Controllers
             if (ModelState.IsValid)
             {
                 string username = User.Identity.Name;
-                Guid clubid= Guid.NewGuid();
+                Guid clubid = Guid.NewGuid();
 
                 Chat chat = new Chat()
                 {
@@ -38,7 +38,7 @@ namespace FightClub.Controllers
                     Profile = GetUser(username).Result,
                     ProfileId = GetUser(username).Result.Id
                 };
-                await _context.AddEntityToDbAsync<Chat>(chat);
+                await _context.AddEntityToDbAsync(chat);
 
                 club.Id = clubid;
                 club.ChatClub = chat;
@@ -116,6 +116,6 @@ namespace FightClub.Controllers
         {
             return RedirectToAction("AllClubs", "Club");
         }
-        
+
     }
 }

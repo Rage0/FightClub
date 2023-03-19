@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Chat
 {
     public class ChatController : Controller
     {

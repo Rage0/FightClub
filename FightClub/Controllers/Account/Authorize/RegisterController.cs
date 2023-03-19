@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Account.Authorize
 {
     [AllowAnonymous]
     public class RegisterController : Controller

@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Club
 {
     public class ClubController : Controller
     {
         private IRepositoryContext _context;
         private UserManager<UserProfile> _userManager;
         public ClubController(IRepositoryContext context, UserManager<UserProfile> userManager)
-        { 
+        {
             _context = context;
             _userManager = userManager;
         }

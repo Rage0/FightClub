@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Chat
 {
     [Authorize]
     public class CrudChatController : Controller
@@ -41,7 +41,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _context.AddRangeEntityToDbAsync<Chat>(chats);
+                await _context.AddRangeEntityToDbAsync(chats);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultChatUrl();
@@ -83,7 +83,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.RemovetRangeEntityToDb<Chat>(chats);
+                _context.RemovetRangeEntityToDb(chats);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultChatUrl();

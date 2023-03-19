@@ -31,7 +31,7 @@ namespace EntityFramework
                 .HasOne(post => post.Comments)
                 .WithOne()
                 .HasForeignKey<Chat>(chat => chat.PostId)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Chat>()
                 .HasMany(chat => chat.Massages)

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Post
 {
     [Authorize]
     public class CrudPostController : Controller
@@ -43,7 +43,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _context.AddRangeEntityToDbAsync<Post>(posts);
+                await _context.AddRangeEntityToDbAsync(posts);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultPostUrl();
@@ -68,7 +68,7 @@ namespace FightClub.Controllers
                 {
                     _context.RemovetEntityToDb<Post>(post);
                 }
-                
+
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultPostUrl();
@@ -86,7 +86,7 @@ namespace FightClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.RemovetRangeEntityToDb<Post>(posts);
+                _context.RemovetRangeEntityToDb(posts);
                 if (string.IsNullOrEmpty(returnUrl) || string.IsNullOrWhiteSpace(returnUrl))
                 {
                     return DefaultPostUrl();
@@ -101,7 +101,7 @@ namespace FightClub.Controllers
         #endregion
 
         #region Update Post
-        public IActionResult UpdatePost (Post post, string returnUrl = "")
+        public IActionResult UpdatePost(Post post, string returnUrl = "")
         {
             if (ModelState.IsValid)
             {

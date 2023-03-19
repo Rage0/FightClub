@@ -6,7 +6,7 @@ using EntityFramework.Entity;
 using DataModel.Interfaces;
 using DataModel.Models.Identity;
 using Microsoft.AspNetCore.Identity;
-using FightClub.Infrastructure.TransientClasses;
+using NetworkClub.Infrastructure.TransientClasses;
 
 var builder = WebApplication.CreateBuilder(args);
 

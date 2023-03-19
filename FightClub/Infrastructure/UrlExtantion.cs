@@ -1,4 +1,4 @@
-﻿namespace FightClub.Infrastructure
+﻿namespace NetworkClub.Infrastructure
 {
     public static class UrlExtantion
     {

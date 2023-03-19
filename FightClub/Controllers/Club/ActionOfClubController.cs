@@ -1,10 +1,10 @@
 ﻿using DataModel.Interfaces;
 using DataModel.Models.Entity;
-using FightClub.Infrastructure.TransientClasses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NetworkClub.Infrastructure.TransientClasses;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Club
 {
     public class ActionOfClubController : Controller
     {

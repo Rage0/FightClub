@@ -1,0 +1,35 @@
+[
+  {
+    "outputFileName": "wwwroot/lib/css/allTags.min.css",
+    "inputFiles": [
+      "wwwroot/lib/css/allTags.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/css/content.min.css",
+    "inputFiles": [
+      "wwwroot/lib/css/content.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/lib/css/content.css",
+      "wwwroot/lib/css/allTags.css",
+      "wwwroot/lib/css/image.css",
+      "wwwroot/lib/css/border.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/css/image.min.css",
+    "inputFiles": [
+      "wwwroot/lib/css/image.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/css/border.min.css",
+    "inputFiles": [
+      "wwwroot/lib/css/border.css"
+    ]
+  }
+]

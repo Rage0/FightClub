@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Account.User
 {
     public class UserController : Controller
     {

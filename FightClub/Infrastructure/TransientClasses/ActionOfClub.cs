@@ -4,7 +4,7 @@ using DataModel.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace FightClub.Infrastructure.TransientClasses
+namespace NetworkClub.Infrastructure.TransientClasses
 {
     public class ActionOfClub
     {
@@ -25,7 +25,7 @@ namespace FightClub.Infrastructure.TransientClasses
             if (club != null && user != null)
             {
                 club.Members.Add(user);
-                _context.UpdateEntityToDb<Club>(club);
+                _context.UpdateEntityToDb(club);
             }
         }
 
@@ -38,7 +38,7 @@ namespace FightClub.Infrastructure.TransientClasses
             if (club != null && user != null)
             {
                 club.Members.Remove(user);
-                _context.UpdateEntityToDb<Club>(club);
+                _context.UpdateEntityToDb(club);
             }
         }
 
@@ -51,7 +51,7 @@ namespace FightClub.Infrastructure.TransientClasses
             if (club != null)
             {
                 club.Members.ToList().Clear();
-                _context.UpdateEntityToDb<Club>(club);
+                _context.UpdateEntityToDb(club);
             }
         }
     }

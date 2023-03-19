@@ -1,0 +1,66 @@
+.content {
+    margin-top: 10px;
+    width: 50%;
+    min-height: 95vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content_main_block {
+    display: block;
+    padding: 10px;
+    width: 99vw;
+    height: 35px;
+    background-color: #F9D1A0;
+}
+
+.content_flex{
+    display: flex;
+    width: 56%;
+    height:auto;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.content_row_box {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.content_box {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+body {
+    background-color: #cbeff2ff;
+    margin: 0;
+    padding: 0;
+}
+
+.img-list {
+    background-image: url(/Img/icon_svg/Tilda_Icons_1ed_list.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-group{
+    background-image: url(/Img/icon_svg/Tilda_Icons_1ed_group.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-bubbles {
+    background-image: url(/Img/icon_svg/Tilda_Icons_10cw_bubbles.svg);
+    width: 30px;
+    height: 30px;
+}
+
+.img-shadow {
+    
+}
+.border_double {
+    border-style: double;
+    border-color: #08AEBE;
+}

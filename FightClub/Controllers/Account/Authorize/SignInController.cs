@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FightClub.Controllers
+namespace NetworkClub.Controllers.Account.Authorize
 {
     [AllowAnonymous]
     public class SignInController : Controller
@@ -14,7 +14,7 @@ namespace FightClub.Controllers
         public SignInController(SignInManager<UserProfile> signInManager, UserManager<UserProfile> userManager)
         {
             _signInManager = signInManager;
-            _userManager= userManager;
+            _userManager = userManager;
         }
 
         public IActionResult SignIn()
@@ -29,7 +29,7 @@ namespace FightClub.Controllers
             if (user != null)
             {
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-                if (result.Succeeded) 
+                if (result.Succeeded)
                 {
                     return RedirectToAction("PostWall", "Post");
                 }
